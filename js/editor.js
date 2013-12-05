@@ -1,6 +1,6 @@
 
 //use 'strict';
-angular.module('tipApp', ['elasticjs.service'])
+angular.module('tipApp', ['elasticjs.service', 'ngSanitize'])
     .controller('tipCtrl', function ($scope, ejsResource) {
         $scope.sampleTip = {
             2: {
@@ -14,24 +14,52 @@ angular.module('tipApp', ['elasticjs.service'])
             }
         };
         $scope.data = {
-            'qid' : 0,
-            'decrease' : 0,
-            'limit' : 0,
-            'tipList' : [],
+            "qid" : 0,
+            "decrease" : 0,
+            "limit" : 0,
+            "tips" : []
         };
 
-        var ejs = ejsResource('http://localhost:9200');
+        var ejs = ejsResource('http://localhost:9200'),
+            ejsIndex = "qtip",
+            ejsTypes = "tip",
+            request = ejs.Request()
+                .indices(ejsIndex)
+                .types(ejsTypes);
 
         $scope.loadTip = function(id) {
-             var results = ejs.Document("tips", "tip", id).doGet();
-             console.log(results);
-            if ($scope.sampleTip[id]) {
-                $scope.data = $scope.sampleTip[id];
-            }
+            $scope.data.qid = id;
+            var termQuery = ejs.TermQuery("qid", id),
+                results =request.query(termQuery)
+                    .doSearch()
+                    .then(
+                        function (data) {
+                            if (data.hits.hits[0]) {
+                                $scope.data = data.hits.hits[0]._source;
+                            }
+                        },
+                        function (error) {
+
+                        }
+            );
+        }
+
+        $scope.saveTip = function() {
+            console.log($scope.data);
+            ejs.Document(ejsIndex, ejsTypes, $scope.data.qid)
+            .source($scope.data)
+            .doIndex();
         }
 
         $scope.addTip = function() {
-            $scope.data.tipList.push($scope.tipText);
+            $scope.data.tips.push($scope.tipText);
+            $scope.tipText = '';
+            $scope.saveTip();
+        };
+
+        $scope.removeTip = function(index) {
+            $scope.data.tips.splice(index, 1);
+            $scope.saveTip();
         };
     }
 );

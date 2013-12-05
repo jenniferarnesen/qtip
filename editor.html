@@ -3,6 +3,7 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="qtip.css" rel="stylesheet" media="screen">
         <script src="js/angular.min.js"></script>
+        <script src="js/angular-sanitize.min.js"></script>
         <script src="js/elastic.min.js"></script>
         <script src="js/elastic-angular-client.min.js"></script>
         <script src="js/editor.js"></script>
@@ -15,11 +16,12 @@
             Dummy data for question 1...<br>
 
             <div class="qtip" id="qtip_1"
-                ng-controller="tipCtrl"
-                ng-init="loadTip(1)">
+                ng-init="loadTip(1)"
+                ng-controller="tipCtrl">
             <ol>
                 <li ng-repeat="tip in data.tips">
-                    <span>{{tip}}</span>
+                    <span ng-bind-html="tip"></span>
+                    <button class="btn-primary" data-ng-click="removeTip($index)">X</button>
                 </li>
             </ol>
             <form ng-submit="addTip()">
@@ -37,17 +39,18 @@
             <div class="qtip" id="qtip_1"
                 ng-controller="tipCtrl"
                 ng-init="loadTip(2)">
-            <ol>
-                <li ng-repeat="tip in data.tips">
-                    <span>{{tip}}</span>
-                </li>
-            </ol>
-            <form ng-submit="addTip()">
-                <input type="text" ng-model="tipText"  size="30"
-                       placeholder="Add new tip here">
-                <input class="btn-primary" type="submit" value="Add tip">
-            </form>
-            </div>
+                <ol>
+                    <li ng-repeat="tip in data.tips">
+                        <span ng-bind-html="tip"></span>
+                        <button class="btn-primary" data-ng-click="removeTip($index)">X</button>
+                    </li>
+                </ol>
+                <form ng-submit="addTip()">
+                    <input type="text" ng-model="tipText" size="30"
+                           placeholder="Add new tip here">
+                    <input class="btn-primary" type="submit" value="Add tip">
+                </form>
+                </div>
             </div>
         </div>
     </body>
