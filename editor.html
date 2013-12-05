@@ -11,34 +11,11 @@
 
     <body ng-app='tipApp'>
 
-        <div class="question" id="qid_1">
+        <div class="question"
             <p>Question 1. Math</p>
             Dummy data for question 1...<br>
 
-            <div class="qtip" id="qtip_1"
-                ng-init="loadTip(1)"
-                ng-controller="tipCtrl">
-            <ol>
-                <li ng-repeat="tip in data.tips">
-                    <span ng-bind-html="tip"></span>
-                    <button class="btn-primary" data-ng-click="removeTip($index)">X</button>
-                </li>
-            </ol>
-            <form ng-submit="addTip()">
-                <input type="text" ng-model="tipText" size="30"
-                       placeholder="Add new tip here">
-                <input class="btn-primary" type="submit" value="Add tip">
-            </form>
-            </div>
-        </div>
-
-        <div class="question" id="qid_2">
-            <p>Question 2. Math</p>
-            Dummy data for question 2...<br>
-
-            <div class="qtip" id="qtip_1"
-                ng-controller="tipCtrl"
-                ng-init="loadTip(2)">
+            <div class="qtip" ng-init="loadTip(1)" ng-controller="tipCtrl">
                 <ol>
                     <li ng-repeat="tip in data.tips">
                         <span ng-bind-html="tip"></span>
@@ -49,8 +26,57 @@
                     <input type="text" ng-model="tipText" size="30"
                            placeholder="Add new tip here">
                     <input class="btn-primary" type="submit" value="Add tip">
+                    <br>
+                    Decrement: <input type="text" ng-model="data.decrement" size="3" ng-change="saveTip()">
+                    Limit: <input type="text" ng-model="data.limit" size="3" ng-change="saveTip()">
                 </form>
-                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>Question 2. Math</p>
+            Dummy data for question 2...<br>
+
+            <div class="qtip" ng-controller="tipCtrl" ng-init="loadTip(2)">
+                <ol>
+                    <li ng-repeat="tip in data.tips">
+                        <span ng-bind-html="tip"></span>
+                        <button class="btn-primary" data-ng-click="removeTip($index)">x</button>
+                    </li>
+                </ol>
+                <form ng-submit="addTip()">
+                    <input type="text" ng-model="tipText" size="30"
+                           placeholder="Add new tip here">
+                    <input class="btn-primary" type="submit" value="Add tip">
+                                    <br>
+                    Decrement: <input type="text" ng-model="data.decrement" size="3" ng-change="saveTip()">
+                    Limit: <input type="text" ng-model="data.limit" size="3" ng-change="saveTip()">
+                </form>
+            </div>
+        </div>
+
+
+        <div class="question" id="qid_3">
+            <p>Question 3. Math</p>
+            Dummy data for question 3...<br>
+
+            <div class="qtip" id="qtip_1"
+                ng-controller="tipCtrl"
+                ng-init="loadTip(6)">
+                <ol>
+                    <li ng-repeat="tip in data.tips">
+                        <span ng-bind-html="tip"></span>
+                        <button class="btn-primary" data-ng-click="removeTip($index)">X</button>
+                    </li>
+                </ol>
+                <form ng-submit="addTip()">
+                    <input type="text" ng-model="tipText" size="30"
+                           placeholder="Add new tip here">
+                    <input class="btn-primary" type="submit" value="Add tip">
+                    <br>
+                    Decrement: <input type="text" ng-model="data.decrement" size="3" ng-change="saveTip()">
+                    Limit: <input type="text" ng-model="data.limit" size="3" ng-change="saveTip()">
+                </form>
             </div>
         </div>
     </body>

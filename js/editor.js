@@ -2,24 +2,6 @@
 //use 'strict';
 angular.module('tipApp', ['elasticjs.service', 'ngSanitize'])
     .controller('tipCtrl', function ($scope, ejsResource) {
-        $scope.sampleTip = {
-            2: {
-            "decrease" : 1,
-            "limit" : 2,
-            "tips" : [
-                    "The dummy common denominator",
-                    "<a href=\"http://www.youtube.com/watch?v=RIhwfqULbAE\" target=\"_blank\">View Youtube</a>",
-                    "1/6 + 4/6"
-                ]
-            }
-        };
-        $scope.data = {
-            "qid" : 0,
-            "decrease" : 0,
-            "limit" : 0,
-            "tips" : []
-        };
-
         var ejs = ejsResource('http://localhost:9200'),
             ejsIndex = "qtip",
             ejsTypes = "tip",
@@ -27,20 +9,25 @@ angular.module('tipApp', ['elasticjs.service', 'ngSanitize'])
                 .indices(ejsIndex)
                 .types(ejsTypes);
 
-        $scope.loadTip = function(id) {
-            $scope.data.qid = id;
-            var termQuery = ejs.TermQuery("qid", id),
-                results =request.query(termQuery)
-                    .doSearch()
-                    .then(
-                        function (data) {
-                            if (data.hits.hits[0]) {
-                                $scope.data = data.hits.hits[0]._source;
-                            }
-                        },
-                        function (error) {
+        $scope.data = {
+            "qid" : 0,
+            "decrement" : 0,
+            "limit" : 0,
+            "tips" : []
+        };
 
+        $scope.loadTip = function(id) {
+            var termQuery = ejs.TermQuery("qid", id);
+
+            $scope.data.qid = id;
+
+            request.query(termQuery).doSearch()
+                .then(
+                    function (data) {
+                        if (data.hits.hits[0]) {
+                            $scope.data = data.hits.hits[0]._source;
                         }
+                    }
             );
         }
 
