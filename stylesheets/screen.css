@@ -534,16 +534,6 @@ body.two-col #content {
 }
 
 /* line 15, ../sass/screen.scss */
-.tip.one {
-  display: none;
-}
-
-/* line 19, ../sass/screen.scss */
-.tip.two {
-  display: none;
-}
-
-/* line 23, ../sass/screen.scss */
-.tip.three {
+.tip {
   display: none;
 }
