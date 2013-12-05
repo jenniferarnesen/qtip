@@ -30,10 +30,9 @@ function tipCtrl($scope) {
         if ($scope.tips[id]) {
             $scope.tipList = $scope.tips[id].tips;
         }
-        $scope.count = scope.tipList.length;
     }
 
-    $scope.addTodo = function() {
+    $scope.addTip = function() {
         $scope.tipList.push($scope.tipText);
     };
 }
