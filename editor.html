@@ -1,12 +1,14 @@
-<html >
+<html>
     <head>
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="qtip.css" rel="stylesheet" media="screen">
         <script src="js/angular.min.js"></script>
         <script src="js/elastic.min.js"></script>
+        <script src="js/elastic-angular-client.min.js"></script>
         <script src="js/editor.js"></script>
     </head>
-    <body ng-app>
+
+    <body ng-app='tipApp'>
 
         <div class="question" id="qid_1">
             <p>Question 1. Math</p>
@@ -16,7 +18,7 @@
                 ng-controller="tipCtrl"
                 ng-init="loadTip(1)">
             <ol>
-                <li ng-repeat="tip in tipList">
+                <li ng-repeat="tip in data.tips">
                     <span>{{tip}}</span>
                 </li>
             </ol>
@@ -24,8 +26,6 @@
                 <input type="text" ng-model="tipText" size="30"
                        placeholder="Add new tip here">
                 <input class="btn-primary" type="submit" value="Add tip">
-                <br><span>Decrement per tip</span>
-                <input type="text" ng-model="decrease" size="3">
             </form>
             </div>
         </div>
@@ -38,8 +38,8 @@
                 ng-controller="tipCtrl"
                 ng-init="loadTip(2)">
             <ol>
-                <li ng-repeat="tip in tipList">
-                    <span ng-bind-html="tip">{{tip}}</span>
+                <li ng-repeat="tip in data.tips">
+                    <span>{{tip}}</span>
                 </li>
             </ol>
             <form ng-submit="addTip()">
@@ -50,29 +50,5 @@
             </div>
             </div>
         </div>
-
-        <div class="question" id="qid_3">
-            <p>Question 3. Math</p>
-
-             Dummy data for question 3... <br>
-
-            <div class="qtip" id="qtip_1"
-                ng-controller="tipCtrl"
-                ng-init="loadTip(3)">
-            <ol>
-                <li ng-repeat="tip in tipList">
-                    <span>{{tip}}</span>
-                </li>
-            </ol>
-            <form ng-submit="addTip()">
-                <input type="text" ng-model="tipText"  size="30"
-                       placeholder="add new tip here">
-                <input class="btn-primary" type="submit" value="Add tip">
-            </form>
-            </div>
-            </div>
-
-        </div>
-
     </body>
 </html>

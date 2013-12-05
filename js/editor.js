@@ -1,41 +1,40 @@
-function tipCtrl($scope) {
-    $scope.tips = {
-        1: {
-        "qid": 1,
-        "decrease" : 1,
-        "limit" : 2,
-        "tips" : [
-                "The common denominator",
-                "<a href=\"http://www.youtube.com/watch?v=RIhwfqULbAE\" target=\"_blank\">View Youtube</a>",
-                "1/6 + 4/6"
-            ]
-        },
-        3: {
-        "qid": 3,
-        "decrease" : 1,
-        "limit" : 2,
-        "tips" : [
-                "The same common denominator",
-                "<a href=\"http://www.youtube.com/watch?v=RIhwfqULbAE\" target=\"_blank\">View the same Youtube</a>",
-                "1/6 + 4/6",
-                "Write down 7/6 for Christ!!!",
-                "OK, you failed the test! Don't bother"
-            ]
-        }
-    };
 
-    $scope.tipList = [];
+//use 'strict';
+angular.module('tipApp', ['elasticjs.service'])
+    .controller('tipCtrl', function ($scope, ejsResource) {
+        $scope.sampleTip = {
+            2: {
+            "decrease" : 1,
+            "limit" : 2,
+            "tips" : [
+                    "The dummy common denominator",
+                    "<a href=\"http://www.youtube.com/watch?v=RIhwfqULbAE\" target=\"_blank\">View Youtube</a>",
+                    "1/6 + 4/6"
+                ]
+            }
+        };
+        $scope.data = {
+            'qid' : 0,
+            'decrease' : 0,
+            'limit' : 0,
+            'tipList' : [],
+        };
 
-    $scope.loadTip = function(id) {
-        if ($scope.tips[id]) {
-            $scope.tipList = $scope.tips[id].tips;
+        var ejs = ejsResource('http://localhost:9200');
+
+        $scope.loadTip = function(id) {
+             var results = ejs.Document("tips", "tip", id).doGet();
+             console.log(results);
+            if ($scope.sampleTip[id]) {
+                $scope.data = $scope.sampleTip[id];
+            }
         }
+
+        $scope.addTip = function() {
+            $scope.data.tipList.push($scope.tipText);
+        };
     }
-
-    $scope.addTip = function() {
-        $scope.tipList.push($scope.tipText);
-    };
-}
+);
 
 
 
