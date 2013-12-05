@@ -532,3 +532,18 @@ body.two-col #content {
 * html body.two-col #content {
   overflow-x: hidden;
 }
+
+/* line 15, ../sass/screen.scss */
+.tip.one {
+  display: none;
+}
+
+/* line 19, ../sass/screen.scss */
+.tip.two {
+  display: none;
+}
+
+/* line 23, ../sass/screen.scss */
+.tip.three {
+  display: none;
+}
