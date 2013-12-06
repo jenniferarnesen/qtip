@@ -24,8 +24,9 @@
 			<meter min="0" max="4" value="4">350 degrees</meter>
 			<img src="images/fractionquestion.jpg"></img><br/>
 			<input type="text" class="answer"/>
-			<a href="#" ng-click="viewTip()"
-			class="tip-button">Trade a point for a tip</a>
+			<a href="#" class="tip-button"
+ 				ng-click="viewTip()" ng-show="tipsToShow"
+			>Trade a point for a tip</a>
 			<div class="qtip">
 				<ol>
                     <li ng-repeat="tip in data.viewed">

@@ -16,6 +16,7 @@ angular.module('tipApp', ['elasticjs.service', 'ngSanitize'])
             "tips" : [],
             "viewed" : []
         };
+        $scope.tipsToShow = false
 
         $scope.loadTip = function(id) {
             var termQuery = ejs.TermQuery("qid", id);
@@ -29,6 +30,7 @@ angular.module('tipApp', ['elasticjs.service', 'ngSanitize'])
                             $scope.data = data.hits.hits[0]._source;
                         }
                         $scope.data.viewed = [];
+                        $scope.tipsToShow = $scope.data.tips.length > 0;
                     }
             );
         }
@@ -40,6 +42,7 @@ angular.module('tipApp', ['elasticjs.service', 'ngSanitize'])
                 console.log(tmp);
                 $scope.data.viewed.push(tmp);
             }
+            $scope.tipsToShow = $scope.data.tips.length > 0;
         }
 
         $scope.saveTip = function() {
