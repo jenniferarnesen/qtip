@@ -1,4 +1,4 @@
-<html ng-app='tipApp'>
+<html>
 	<head>
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="qtip.css" rel="stylesheet" media="screen">
@@ -7,32 +7,26 @@
         <script src="js/elastic.min.js"></script>
         <script src="js/elastic-angular-client.min.js"></script>
         <script src="js/qtip.js"></script>
-		<!--
-	    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-	    <link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
-		[if lt IE 8]>
-		      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
-		<![endif]-->
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/qtip.jquery.js"></script>
 	</head>
 	<body>
-		<div class="question" ng-controller="tipCtrl"
-			 ng-init="loadTip(1, false)">
+		<div class="question">
 			<h3>Question 1. Math</h3>
-			<span class="score"></span>
-			<meter class="max-score"></meter>
 			<img src="images/fractionquestion.jpg"></img><br/>
 			<input type="text" class="answer"/>
-			<a href="#" class="tip-button"
- 				ng-click="viewTip()" ng-show="tipsToShow"
-			>Trade a point for a tip</a>
-			<div class="qtip">
-				<ol>
-                    <li ng-repeat="tip in data.viewed">
-                        <span ng-bind-html="tip"></span>
-                    </li>
-                </ol>
+			<div ng-app='tipApp' ng-controller="tipCtrl" ng-init="loadTip(1)">
+			Maximum score: {{tipScore}} <meter max="{{maxScore}}" min="{{minScore}}" value="{{score}}" ng-show="tipsToShow"></meter>
+
+
+				<a href="#" class="tip-button"
+	 				ng-click="viewTip()" ng-show="tipsToShow"
+				>Trade a point for a tip</a>
+				<div class="qtip">
+					<ol>
+	                    <li ng-repeat="tip in data.viewed">
+	                        <span ng-bind-html="tip"></span>
+	                    </li>
+	                </ol>
+				</div>
 			</div>
 		</div>
 	</body>
