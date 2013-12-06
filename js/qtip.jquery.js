@@ -14,6 +14,9 @@ $( document ).ready(function() {
        },
        setMaxScoreText = function() {
            $(".score").html("Maximum possible score: " + totalScore);
+           $(".max-score").attr("min", questionData.min);
+           $(".max-score").attr("max", questionData.max);
+           $(".max-score").attr("value", totalScore);
        };
 
    setMaxScoreText();
